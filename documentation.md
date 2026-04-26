@@ -1,0 +1,449 @@
+# 📘 Heart Failure ML System — Technical Documentation
+
+## 🧠 Overview
+
+This project is a **production-style machine learning system** for predicting heart failure risk using clinical data. It includes:
+
+* Data validation & preprocessing
+* Feature engineering
+* Model training & calibration
+* Explainability using SHAP
+* REST API using FastAPI
+* Monitoring & logging
+* Docker-based deployment
+
+---
+
+## 🏗️ System Architecture
+
+```
+Client (Dashboard / API Call)
+        ↓
+FastAPI (app/)
+        ↓
+Services Layer
+        ↓
+Inference Pipeline
+        ↓
+Trained Model + SHAP Explainer
+        ↓
+Response (Prediction + Explanation)
+```
+
+---
+
+## 📁 Project Structure (High-Level)
+
+```
+heart-failure-ml-system/
+│
+├── config/            # YAML configs
+├── data/              # raw + processed data
+├── src/               # core ML system
+├── app/               # FastAPI layer
+├── models/            # trained models + artifacts
+├── reports/           # plots + outputs
+├── scripts/           # CLI entry points
+├── tests/             # unit + integration tests
+├── dashboard/         # Streamlit UI (optional)
+├── docker/            # Docker configs
+```
+
+---
+
+## ⚙️ Configuration System
+
+Main configuration file:
+
+```
+config/config.yaml
+```
+
+Controls:
+
+* model parameters
+* data split
+* feature definitions
+* SHAP settings
+* thresholds
+
+---
+
+## 🔄 Data Pipeline
+
+### 1. Data Loading
+
+* Source: CSV dataset
+* Loaded using `src/data/load.py`
+
+### 2. Validation
+
+* Schema-driven validation (`schema.json`)
+* Checks:
+
+  * required columns
+  * data types
+  * value ranges
+
+### 3. Preprocessing
+
+* duplicate removal
+* feature/target split
+* train/test split
+
+---
+
+## 🧩 Feature Engineering
+
+Defined in:
+
+```
+src/features/
+```
+
+Includes:
+
+* ColumnTransformer pipeline
+* scaling (numeric features)
+* passthrough categorical features
+* feature consistency checks
+
+---
+
+## 🤖 Model Layer
+
+Located in:
+
+```
+src/models/
+```
+
+### Model Used
+
+* Random Forest Classifier
+
+### Capabilities
+
+* training
+* evaluation (ROC-AUC, confusion matrix)
+* calibration (isotonic)
+* hyperparameter tuning
+
+---
+
+## 📊 Evaluation
+
+Metrics:
+
+* ROC-AUC
+* Precision / Recall
+* Confusion Matrix
+
+Saved to:
+
+```
+models/metadata/metrics.json
+```
+
+---
+
+## 🔍 Explainability (SHAP)
+
+Implemented in:
+
+```
+src/explainability/
+```
+
+Features:
+
+* global feature importance
+* local explanations
+* interaction effects
+
+Artifacts:
+
+* SHAP values
+* summary plots
+* force plots (HTML)
+
+---
+
+## 🧠 Training Pipeline
+
+Main entry:
+
+```
+src/pipelines/training_pipeline.py
+```
+
+### Steps:
+
+1. Load config
+2. Load & validate data
+3. Preprocess
+4. Feature engineering
+5. Train model
+6. Calibrate (optional)
+7. Evaluate
+8. Save artifacts
+9. Generate SHAP plots
+
+---
+
+## 🔮 Inference Pipeline
+
+Used in API:
+
+```
+src/pipelines/inference_pipeline.py
+```
+
+### Steps:
+
+1. Validate input
+2. Align feature order
+3. Predict probability
+4. Generate SHAP explanation
+
+---
+
+## 🌐 API Layer
+
+Built with FastAPI.
+
+Location:
+
+```
+app/
+```
+
+### Endpoints
+
+#### Health Check
+
+```
+GET /api/v1/health/
+```
+
+#### Prediction
+
+```
+POST /api/v1/predict/
+```
+
+Response:
+
+```
+{
+  "death_risk": 0.72
+}
+```
+
+#### Explanation
+
+```
+POST /api/v1/explain/
+```
+
+Response:
+
+```
+{
+  "death_risk": 0.72,
+  "explanation": {
+    "age": 0.12,
+    "ejection_fraction": -0.30
+  }
+}
+```
+
+---
+
+## 🧱 Services Layer
+
+Located in:
+
+```
+app/services/
+```
+
+Separates:
+
+* API logic
+* ML logic
+
+---
+
+## 🔌 Dependencies Layer
+
+Located in:
+
+```
+app/dependencies/
+```
+
+Handles:
+
+* model loading (cached)
+* SHAP explainer loading
+* schema loading
+
+---
+
+## 🧪 Testing
+
+Two levels:
+
+### Unit Tests
+
+```
+tests/unit/
+```
+
+### Integration Tests
+
+```
+tests/integration/
+```
+
+### API Tests
+
+```
+app/tests/
+```
+
+Run:
+
+```
+pytest
+```
+
+---
+
+## 📈 Monitoring
+
+Located in:
+
+```
+src/monitoring/
+```
+
+Tracks:
+
+* prediction logs
+* performance history
+* drift detection
+
+---
+
+## 🐳 Docker Deployment
+
+Dockerfile:
+
+```
+app/Dockerfile
+```
+
+Run:
+
+```
+docker build -t heart-failure-api -f app/Dockerfile .
+docker run -p 8000:8000 heart-failure-api
+```
+
+---
+
+## 🖥️ Dashboard (Optional)
+
+Located in:
+
+```
+dashboard/
+```
+
+Built with Streamlit.
+
+Run:
+
+```
+streamlit run dashboard/app.py
+```
+
+---
+
+## 🔐 Environment Variables
+
+Defined in:
+
+```
+.env
+```
+
+Used for:
+
+* paths
+* environment settings
+* logging
+
+---
+
+## 🚀 Running the System
+
+### 1. Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### 2. Train model
+
+```
+python scripts/train.py
+```
+
+### 3. Run API
+
+```
+python run_api.py
+```
+
+### 4. Run dashboard (optional)
+
+```
+streamlit run dashboard/app.py
+```
+
+---
+
+## ⚠️ Important Notes
+
+* Models and artifacts are generated by pipeline (not manually added)
+* Feature order must remain consistent
+* SHAP background must match training data
+* API assumes trained model exists
+
+---
+
+## 🔮 Future Improvements
+
+* model versioning
+* CI/CD pipeline
+* cloud deployment
+* real-time monitoring dashboard
+* authentication & rate limiting
+
+---
+
+## 🧭 Conclusion
+
+This project is designed as a **modular, scalable ML system**, not just a notebook or script.
+
+It demonstrates:
+
+* ML engineering practices
+* system design
+* explainability
+* deployment readiness
+
+---

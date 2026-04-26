@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+venv/
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/interim/
+data/processed/
+
+# Models (IMPORTANT)
+models/trained/*
+models/calibrated/*
+models/artifacts/*
+models/metadata/*
+
+# Keep folder structure
+!models/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Reports
+reports/
+
+# Streamlit cache
+.streamlit/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.dockerignore

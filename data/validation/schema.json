@@ -1,0 +1,74 @@
+{
+  "columns": {
+    "age": {
+      "type": "float",
+      "min": 0,
+      "max": 120
+    },
+    "anaemia": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    },
+    "creatinine_phosphokinase": {
+      "type": "float",
+      "min": 0
+    },
+    "diabetes": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    },
+    "ejection_fraction": {
+      "type": "float",
+      "min": 0,
+      "max": 100
+    },
+    "high_blood_pressure": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    },
+    "platelets": {
+      "type": "float",
+      "min": 0
+    },
+    "serum_creatinine": {
+      "type": "float",
+      "min": 0
+    },
+    "serum_sodium": {
+      "type": "float",
+      "min": 0,
+      "max": 200
+    },
+    "sex": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    },
+    "smoking": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    },
+    "time": {
+      "type": "int",
+      "min": 0
+    },
+    "DEATH_EVENT": {
+      "type": "int",
+      "allowed_values": [0, 1]
+    }
+  },
+  "required_columns": [
+    "age",
+    "anaemia",
+    "creatinine_phosphokinase",
+    "diabetes",
+    "ejection_fraction",
+    "high_blood_pressure",
+    "platelets",
+    "serum_creatinine",
+    "serum_sodium",
+    "sex",
+    "smoking",
+    "time",
+    "DEATH_EVENT"
+  ]
+}

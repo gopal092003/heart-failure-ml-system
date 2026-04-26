@@ -1,0 +1,62 @@
+project:
+  name: heart-failure-ml-system
+  version: 1.0.0
+
+data:
+  raw_path: data/raw/heart_failure_clinical_records_dataset.csv
+  processed_path: data/processed/
+  target_column: DEATH_EVENT
+  drop_columns:
+    - time
+
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+model:
+  name: random_forest
+  n_estimators: 100
+  max_depth: null
+  min_samples_split: 10
+  class_weight: balanced
+  n_jobs: -1
+  random_state: 42
+
+calibration:
+  enabled: true
+  method: isotonic
+  cv: 5
+
+threshold:
+  default: 0.5
+  optimized: 0.35   # tuned for recall (example)
+
+features:
+  numeric:
+    - age
+    - creatinine_phosphokinase
+    - ejection_fraction
+    - platelets
+    - serum_creatinine
+    - serum_sodium
+  categorical:
+    - anaemia
+    - diabetes
+    - high_blood_pressure
+    - sex
+    - smoking
+
+shap:
+  background_sample_size: 100
+  save_values: true
+
+paths:
+  model_dir: models/trained/
+  calibrated_dir: models/calibrated/
+  artifacts_dir: models/artifacts/
+  reports_dir: reports/
+
+experiment:
+  tracking: true
+  experiment_name: heart_failure_experiment

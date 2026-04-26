@@ -1,0 +1,13 @@
+[project]
+name = "heart-failure-ml-system"
+version = "1.0.0"
+description = "ML system for heart failure prediction with SHAP explainability"
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"
