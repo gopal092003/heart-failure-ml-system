@@ -1,66 +1,92 @@
-# ❤️ Heart Failure ML System
+# Heart Failure ML System
 
-A production-style machine learning system to predict heart failure risk using clinical data, with explainability and API deployment.
-
----
-
-## 👨‍💻 Author
-
-**Gopal Gupta**
-🔗 GitHub: https://github.com/gopal092003/heart-failure-ml-system
+A machine learning system for predicting the risk of heart failure using clinical data. The project combines a reproducible training pipeline, model explainability with SHAP, a FastAPI inference service, and optional deployment components such as Docker and a Streamlit dashboard.
 
 ---
 
-## 🚀 Features
+## Overview
 
-* 📊 End-to-end ML pipeline (data → model → evaluation)
-* 🔍 Explainable predictions using SHAP
-* 🌐 REST API built with FastAPI
-* 🧪 Unit + integration + API tests
-* 📦 Dockerized for deployment
-* 📈 Monitoring & drift detection
-* 🖥️ Optional Streamlit dashboard
+This project demonstrates how a machine learning model can be developed and deployed as a production-style application. It includes data preprocessing, model training, explainability, API serving, testing, and deployment support within a modular project structure.
 
 ---
 
-## 🧠 Tech Stack
+## Features
 
-* Python, Pandas, NumPy
-* Scikit-learn
-* SHAP
-* FastAPI
-* Streamlit
-* Docker
+- End-to-end machine learning pipeline
+- Heart failure risk prediction
+- Model explainability using SHAP
+- REST API built with FastAPI
+- Unit, integration, and API tests
+- Docker support
+- Optional Streamlit dashboard
+- Monitoring and drift detection utilities
 
 ---
 
-## 📁 Project Structure
+## Tech Stack
 
-```bash
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- SHAP
+- FastAPI
+- Streamlit
+- Docker
+
+---
+
+## Project Structure
+
+```
 heart-failure-ml-system/
 │
-├── src/              # ML system (pipelines, models, features)
-├── app/              # FastAPI application
-├── data/             # datasets
-├── models/           # trained models + artifacts
-├── scripts/          # CLI scripts
-├── tests/            # unit + integration tests
-├── dashboard/        # Streamlit UI (optional)
-├── config/           # YAML configs
+├── app/               # FastAPI application
+├── config/            # Configuration files
+├── dashboard/         # Streamlit dashboard
+├── data/              # Dataset
+├── models/            # Trained models and artifacts
+├── scripts/           # Training and utility scripts
+├── src/               # ML pipeline and feature engineering
+├── tests/             # Unit and integration tests
+│
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## ⚙️ Setup
+## Workflow
 
-### 1. Clone repository
+The project follows a complete machine learning workflow:
+
+1. Load and preprocess clinical data.
+2. Engineer and transform features.
+3. Train the prediction model.
+4. Evaluate model performance.
+5. Generate SHAP explanations.
+6. Save the trained model and artifacts.
+7. Serve predictions through a FastAPI application.
+
+> Add the workflow diagram here if available.
+
+```md
+![Workflow](assets/workflow.png)
+```
+
+---
+
+## Installation
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/gopal092003/heart-failure-ml-system.git
+
 cd heart-failure-ml-system
 ```
 
-### 2. Install dependencies
+Install the dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -68,40 +94,59 @@ pip install -r requirements.txt
 
 ---
 
-## 🏋️ Train Model
+## Training the Model
+
+Run the training pipeline:
 
 ```bash
 python scripts/train.py
 ```
 
-This will:
+The training process will:
 
-* train the model
-* save artifacts
-* generate SHAP plots
+- preprocess the data
+- train the model
+- evaluate performance
+- generate SHAP explanations
+- save the trained model and artifacts
 
 ---
 
-## 🌐 Run API
+## Running the API
+
+Start the FastAPI server:
 
 ```bash
 python run_api.py
 ```
 
-Open:
+The API will be available at:
 
-* Swagger Docs → http://localhost:8000/docs
-* API Base → http://localhost:8000/api/v1
+```
+http://localhost:8000
+```
+
+Interactive documentation:
+
+```
+http://localhost:8000/docs
+```
+
+API base path:
+
+```
+http://localhost:8000/api/v1
+```
 
 ---
 
-## 🔍 Example API Request
+## Example Prediction Request
 
-### Predict
+```http
+POST /api/v1/predict
+```
 
 ```json
-POST /api/v1/predict/
-
 {
   "age": 60,
   "anaemia": 0,
@@ -119,24 +164,41 @@ POST /api/v1/predict/
 
 ---
 
-## 🧪 Run Tests
+## Testing
+
+Run all tests with:
 
 ```bash
 pytest
 ```
 
+The project includes:
+
+- Unit tests
+- Integration tests
+- API tests
+
 ---
 
-## 🐳 Run with Docker
+## Docker
+
+Build the Docker image:
 
 ```bash
 docker build -t heart-failure-api -f app/Dockerfile .
+```
+
+Run the container:
+
+```bash
 docker run -p 8000:8000 heart-failure-api
 ```
 
 ---
 
-## 🖥️ Dashboard (Optional)
+## Streamlit Dashboard
+
+Launch the optional dashboard:
 
 ```bash
 streamlit run dashboard/app.py
@@ -144,49 +206,37 @@ streamlit run dashboard/app.py
 
 ---
 
-## 📊 Dataset
+## Dataset
 
-Heart Failure Clinical Records Dataset
-(Source: Kaggle)
-
----
-
-## 🔐 Environment Variables
-
-Configured via `.env`
+The project uses the **Heart Failure Clinical Records Dataset**, available on Kaggle.
 
 ---
 
-## 🧭 Roadmap
+## Configuration
 
-* [ ] Model versioning
-* [ ] Cloud deployment (AWS/GCP)
-* [ ] CI/CD pipeline
-* [ ] Authentication & rate limiting
+Application settings can be managed through the project configuration files and environment variables.
 
 ---
 
-## 📄 License
+## Future Improvements
 
-This project is for educational and demonstration purposes.
-
----
-
-## ⭐ Acknowledgements
-
-* Scikit-learn
-* SHAP
-* FastAPI
+- Model versioning
+- Hyperparameter optimization
+- CI/CD pipeline
+- Cloud deployment
+- Authentication and rate limiting
+- Experiment tracking with MLflow
 
 ---
 
-## 💡 Final Note
+## Author
 
-This is not just a model—it’s a **complete ML system** with:
+**Gopal Gupta**
 
-* training pipeline
-* explainability
-* API
-* deployment setup
+GitHub: https://github.com/gopal092003
 
 ---
+
+## License
+
+This project is licensed under the MIT License.
