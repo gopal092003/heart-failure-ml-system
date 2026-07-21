@@ -80,7 +80,7 @@ The project follows a complete machine learning workflow:
 
 Clone the repository:
 
-```bash
+```
 git clone https://github.com/gopal092003/heart-failure-ml-system.git
 
 cd heart-failure-ml-system
@@ -88,7 +88,7 @@ cd heart-failure-ml-system
 
 Install the dependencies:
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
@@ -98,7 +98,7 @@ pip install -r requirements.txt
 
 Run the training pipeline:
 
-```bash
+```
 python scripts/train.py
 ```
 
@@ -116,7 +116,7 @@ The training process will:
 
 Start the FastAPI server:
 
-```bash
+```
 python run_api.py
 ```
 
@@ -168,7 +168,7 @@ POST /api/v1/predict
 
 Run all tests with:
 
-```bash
+```
 pytest
 ```
 
@@ -184,13 +184,13 @@ The project includes:
 
 Build the Docker image:
 
-```bash
+```
 docker build -t heart-failure-api -f app/Dockerfile .
 ```
 
 Run the container:
 
-```bash
+```
 docker run -p 8000:8000 heart-failure-api
 ```
 
@@ -200,7 +200,7 @@ docker run -p 8000:8000 heart-failure-api
 
 Launch the optional dashboard:
 
-```bash
+```
 streamlit run dashboard/app.py
 ```
 
